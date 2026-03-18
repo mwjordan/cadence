@@ -22,6 +22,9 @@ gem "jbuilder"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
+# Use devise for authentication [https://github.com/heartcombo/devise]
+gem "devise"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
@@ -61,6 +64,8 @@ group :development do
   gem "web-console"
 end
 
-gem "rspec-rails", "~> 8.0", :groups => [:development, :test]
+gem "rspec-rails", "~> 8.0", groups: [ :development, :test ]
 
-gem "playwright-ruby-client", "~> 1.58", :group => :test
+gem "capybara", "~> 3.40", group: :test
+
+gem "selenium-webdriver", "~> 4.1", group: :test

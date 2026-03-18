@@ -24,6 +24,32 @@
   </head>
 
   <body>
+    <header class="bg-white shadow-sm">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
+        <span class="text-sm font-semibold text-slate-700"><%= content_for(:title) || "Rails App Starter Kit" %></span>
+        <nav class="flex items-center gap-4 text-sm">
+          <% if user_signed_in? %>
+            <span class="text-slate-500">Signed in as: <%= current_user.email %></span>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "rounded bg-slate-100 px-3 py-1 text-slate-700 hover:bg-slate-200" %>
+          <% else %>
+            <%= link_to "Log in", new_user_session_path, class: "text-indigo-600 hover:text-indigo-500" %>
+            <%= link_to "Sign up", new_user_registration_path, class: "rounded bg-indigo-600 px-3 py-1 text-white hover:bg-indigo-500" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <% if notice %>
+      <div class="mx-auto max-w-5xl px-6 pt-4">
+        <p class="rounded-lg bg-green-50 px-4 py-3 text-sm text-green-800"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="mx-auto max-w-5xl px-6 pt-4">
+        <p class="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-800"><%= alert %></p>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
