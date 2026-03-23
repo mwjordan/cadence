@@ -107,7 +107,7 @@ class AppRenameService
 
     # Rename databases if they exist and names have changed
     if snake_name != DB_PLACEHOLDER
-      [ [old_dev_db, new_dev_db], [old_test_db, new_test_db] ].each do |old_name, new_name_db|
+      [ [ old_dev_db, new_dev_db ], [ old_test_db, new_test_db ] ].each do |old_name, new_name_db|
         if database_exists?(connection, old_name)
           # Disconnect other sessions before renaming
           connection.execute("SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '#{old_name}' AND pid <> pg_backend_pid()")

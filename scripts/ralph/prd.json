@@ -1,0 +1,20 @@
+{
+  "project": "RailsAppStarterKit",
+  "branchName": "ralph/example-feature",
+  "description": "Example PRD — replace this with your feature description",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Example: Add a welcome message to dashboard",
+      "description": "As a user, I want to see a personalized welcome message on the dashboard so that I know I'm logged in.",
+      "acceptanceCriteria": [
+        "Dashboard shows 'Welcome, <email>!' when user is signed in",
+        "All existing specs pass: `bundle exec rspec`",
+        "`bundle exec rubocop` passes"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "This is an example story. Replace the entire prd.json with your own feature stories."
+    }
+  ]
+}
