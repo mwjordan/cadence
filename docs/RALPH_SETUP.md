@@ -1,4 +1,4 @@
-# Ralph Setup Guide
+****# Ralph Setup Guide
 
 Ralph is an autonomous AI agent loop that runs AI coding tools (Amp or Claude Code) repeatedly until all user stories in a PRD are complete. Each iteration spawns a fresh AI instance with clean context. Memory persists across iterations via git history, `progress.txt`, and `prd.json`.
 

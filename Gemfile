@@ -62,6 +62,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'dotenv-rails', '>= 3.2'
 end
 
 gem "rspec-rails", "~> 8.0", groups: [ :development, :test ]
@@ -69,3 +70,5 @@ gem "rspec-rails", "~> 8.0", groups: [ :development, :test ]
 gem "capybara", "~> 3.40", group: :test
 
 gem "selenium-webdriver", "~> 4.1", group: :test
+
+
