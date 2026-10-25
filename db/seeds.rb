@@ -3,8 +3,8 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
 # Create default test user
-test_email = ENV.fetch("TEST_EMAIL", "test@example.com")
-test_password = ENV.fetch("TEST_PASSWORD", "password123")
+test_email = ENV.fetch("DEFAULT_USER_EMAIL", "test@example.com")
+test_password = ENV.fetch("DEFAULT_USER_PASSWORD", "password123")
 
 User.find_or_create_by!(email: test_email) do |user|
   user.password = test_password
