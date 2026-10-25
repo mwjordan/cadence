@@ -1,4 +1,6 @@
-# Rails App Starter Kit
+# Cadence
+
+Cadence now includes the first movement check-in loop and an Android voice feasibility experiment. See [the cloud setup and validation notes](docs/movement-check-ins.md). The app targets Ruby 4.0.9 and Rails 8.1.4.
 
 A ready-to-go Rails 8 starter template with authentication, testing, and Tailwind CSS pre-configured. Clone it, rename it, and start building.
 

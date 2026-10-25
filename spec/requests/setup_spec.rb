@@ -9,15 +9,16 @@ RSpec.describe "Setup", type: :request do
 
     it "displays the current app name" do
       get setup_path
-      expect(response.body).to include("RailsAppStarterKit")
+      expect(response.body).to include(Rails.application.class.module_parent_name)
     end
   end
 
   describe "PATCH /setup" do
     context "with a valid name" do
-      after do
-        # Restore original files after test
-        AppRenameService.new("Rails App Starter Kit").call
+      before do
+        # A request spec must never rewrite the working tree or rename real databases.
+        service = instance_double(AppRenameService, call: { human_name: "My Test App", files_updated: [] })
+        allow(AppRenameService).to receive(:new).with("My Test App").and_return(service)
       end
 
       it "renames the app and redirects" do

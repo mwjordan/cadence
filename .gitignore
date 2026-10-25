@@ -38,3 +38,7 @@
 !/app/assets/builds/.keep
 
 /node_modules
+/android/.gradle
+/android/.kotlin
+/android/local.properties
+/android/**/build

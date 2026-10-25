@@ -49,3 +49,8 @@
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
+
+/android/.gradle
+/android/.kotlin
+/android/**/build
+/android/local.properties

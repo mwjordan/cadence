@@ -92,7 +92,7 @@ RSpec.describe 'Authentication E2E', type: :system do
       skip "Depends on seeded test user (db:seed); update or remove this spec to create the user inline"
       # Sign in through the UI
       visit new_user_session_path
-      
+
       fill_in 'Email', with: test_email
       fill_in 'Password', with: test_password
       click_button 'Sign in'

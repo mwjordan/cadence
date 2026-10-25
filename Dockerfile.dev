@@ -1,0 +1,12 @@
+# syntax=docker/dockerfile:1
+FROM ruby:4.0.9-bookworm
+# Bind build inputs so this development image needs only one filesystem layer.
+# The repository itself is mounted by Compose at runtime.
+RUN --mount=type=bind,source=Gemfile,target=/tmp/inputs/Gemfile \
+    --mount=type=bind,source=Gemfile.lock,target=/tmp/inputs/Gemfile.lock \
+    --mount=type=secret,id=proxy_ca \
+    if [ -f /run/secrets/proxy_ca ]; then export BUNDLE_SSL_CA_CERT=/run/secrets/proxy_ca SSL_CERT_FILE=/run/secrets/proxy_ca; fi; \
+    mkdir -p /app && cp /tmp/inputs/Gemfile /tmp/inputs/Gemfile.lock /app/ && \
+    cd /app && BUNDLE_FROZEN=true bundle install --jobs 4
+WORKDIR /app
+EXPOSE 3000

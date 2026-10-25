@@ -6,7 +6,7 @@ Rails 8.1 starter kit with Devise authentication, Tailwind CSS v4, RSpec, and Po
 
 ## Tech Stack
 
-- **Ruby on Rails** 8.1.2 (Ruby 3.x)
+- **Ruby on Rails** 8.1.4 (Ruby 4.0.9)
 - **Hotwire**: Turbo + Stimulus (via jsbundling-rails + stimulus-rails)
 - **Tailwind CSS** v4 (via cssbundling-rails + @tailwindcss/cli)
 - **PostgreSQL** (database)

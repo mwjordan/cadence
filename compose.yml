@@ -1,0 +1,66 @@
+name: cadence-canonical
+services:
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_USER: cadence
+      POSTGRES_PASSWORD: cadence-local-only
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cadence"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  assets:
+    image: node:22-bookworm-slim
+    working_dir: /app
+    command: sh -c 'npm ci && npm run build && npm run build:css'
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    secrets:
+      - proxy_ca
+    environment:
+      NODE_EXTRA_CA_CERTS: /run/secrets/proxy_ca
+  web:
+    image: cadence-canonical-development
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      secrets:
+        - proxy_ca
+    working_dir: /app
+    command: sh -c 'bin/rails db:prepare && bin/rails server -b 0.0.0.0'
+    volumes:
+      - .:/app
+    secrets:
+      - proxy_ca
+    environment:
+      RAILS_ENV: development
+      PGHOST: db
+      PGUSER: cadence
+      PGPASSWORD: cadence-local-only
+      # Development-only credentials in the private Compose network.
+      SOLID_QUEUE_IN_PUMA: "true"
+      SSL_CERT_FILE: /run/secrets/proxy_ca
+      BUNDLE_SSL_CA_CERT: /run/secrets/proxy_ca
+      GIT_SSL_CAINFO: /run/secrets/proxy_ca
+    ports:
+      - "127.0.0.1:${CADENCE_PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+      assets:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "ruby", "-rnet/http", "-e", "exit(Net::HTTP.get_response(URI('http://127.0.0.1:3000/up')).code == '200' ? 0 : 1)"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+volumes:
+  postgres_data:
+  node_modules:
+secrets:
+  proxy_ca:
+    file: ${CADENCE_BUILD_CA:-/etc/ssl/certs/ca-certificates.crt}

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   root "dashboard#show"
+  resources :commitments, only: %i[create update]
+  resources :check_ins, only: :update
+  get "mobile/bootstrap", to: "mobile#show", as: :mobile_bootstrap
 
-  get  "setup", to: "setup#show"
+  get "setup", to: "setup#show"
   patch "setup", to: "setup#update"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

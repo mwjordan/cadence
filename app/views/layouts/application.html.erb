@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "My Test App" %></title>
+    <title><%= content_for(:title) || "Cadence" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="My Test App">
+    <meta name="application-name" content="Cadence">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -23,10 +23,10 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class="bg-slate-50">
     <header class="bg-white shadow-sm">
       <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
-        <span class="text-sm font-semibold text-slate-700"><%= content_for(:title) || "My Test App" %></span>
+        <span class="text-sm font-semibold text-slate-700"><%= content_for(:title) || "Cadence" %></span>
         <nav class="flex items-center gap-4 text-sm">
           <% if user_signed_in? %>
             <span class="text-slate-500">Signed in as: <%= current_user.email %></span>

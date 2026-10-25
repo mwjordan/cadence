@@ -1,0 +1,9 @@
+{
+  "name": "Cadence",
+  "dockerComposeFile": "../compose.yml",
+  "service": "web",
+  "workspaceFolder": "/app",
+  "overrideCommand": false,
+  "forwardPorts": [3000],
+  "shutdownAction": "stopCompose"
+}

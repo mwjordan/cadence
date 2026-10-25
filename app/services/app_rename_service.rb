@@ -110,8 +110,8 @@ class AppRenameService
       [ [ old_dev_db, new_dev_db ], [ old_test_db, new_test_db ] ].each do |old_name, new_name_db|
         if database_exists?(connection, old_name)
           # Disconnect other sessions before renaming
-          connection.execute("SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '#{old_name}' AND pid <> pg_backend_pid()")
-          connection.execute("ALTER DATABASE \"#{old_name}\" RENAME TO \"#{new_name_db}\"")
+          connection.execute("SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = #{connection.quote(old_name)} AND pid <> pg_backend_pid()")
+          connection.execute("ALTER DATABASE #{connection.quote_table_name(old_name)} RENAME TO #{connection.quote_table_name(new_name_db)}")
         end
       end
     end
@@ -121,7 +121,7 @@ class AppRenameService
   end
 
   def database_exists?(connection, name)
-    result = connection.execute("SELECT 1 FROM pg_database WHERE datname = '#{name}'")
+    result = connection.execute("SELECT 1 FROM pg_database WHERE datname = #{connection.quote(name)}")
     result.any?
   end
 
